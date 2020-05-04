@@ -1,0 +1,41 @@
+mm_dedicated_force_servers "192.168.10.11:27015"
+mm_dedicated_force_servers "127.0.0.1:27015"
+connect 192.168.10.11
+
+/home/docker/.steam/sdk32/steamclient.so: cannot open shared object file: No such file or directory
+Looking up breakpad interfaces from steamclient
+Calling BreakpadMiniDumpSystemInit
+
+mkdir sourcemod
+cd sourcemod > /dev/null
+wget https://sm.alliedmods.net/smdrop/1.7/sourcemod-1.7.3-git5334-linux.tar.gz
+tar xf sourcemod-1.7.3-git5334-linux.tar.gz
+cp -rf addons /home/${SERVER_USER}/l4d2/left4dead2
+cp -rf cfg /home/${SERVER_USER}/l4d2/left4dead2
+cd - > /dev/null
+
+mkdir metamod
+cd metamod > /dev/null
+wget https://mms.alliedmods.net/mmsdrop/1.10/mmsource-1.10.7-git971-linux.tar.gz
+tar xf mmsource-1.10.7-git971-linux.tar.gz
+cp -rf addons /home/${SERVER_USER}/l4d2/left4dead2
+cd - > /dev/null
+
+mkdir stripper
+cd stripper > /dev/null
+wget http://www.bailopan.net/stripper/files/stripper-1.2.2-linux.tar.gz
+tar xf stripper-1.2.2-linux.tar.gz
+cp -rf addons /home/${SERVER_USER}/l4d2/left4dead2
+cd - > /dev/null
+
+mkdir zonemod
+cd zonemod > /dev/null
+wget https://github.com/SirPlease/ZoneMod/archive/5e866a5f85fa97bf56e5b8225b16d2df9e4eee1b.zip
+unzip 5e866a5f85fa97bf56e5b8225b16d2df9e4eee1b.zip
+cp -rf ZoneMod-5e866a5f85fa97bf56e5b8225b16d2df9e4eee1b/addons /home/${SERVER_USER}/l4d2/left4dead2
+cp -rf ZoneMod-5e866a5f85fa97bf56e5b8225b16d2df9e4eee1b/cfg /home/${SERVER_USER}/l4d2/left4dead2
+cp -rf ZoneMod-5e866a5f85fa97bf56e5b8225b16d2df9e4eee1b/scripting /home/${SERVER_USER}/l4d2/left4dead2
+cp -rf ZoneMod-5e866a5f85fa97bf56e5b8225b16d2df9e4eee1b/scripts /home/${SERVER_USER}/l4d2/left4dead2
+cd - > /dev/null
+
+

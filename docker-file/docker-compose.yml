@@ -1,0 +1,23 @@
+
+version: "3.7"
+
+services:
+  l4d2server_setup:
+    container_name: l4d2server_setup
+    env_file: .env
+    image: l4d2server_setup:${IMAGE_VERSION}
+    ports:
+      - "27015:27015/tcp"
+      - "27015:27015/udp"
+    volumes:
+      - ../volume:/home/${SERVER_UNAME}
+
+  l4d2server_boot:
+    container_name: l4d2server_boot
+    env_file: .env
+    image: l4d2server_boot:${IMAGE_VERSION}
+    ports:
+      - "27015:27015/tcp"
+      - "27015:27015/udp"
+    volumes:
+      - ../volume:/home/${SERVER_UNAME}

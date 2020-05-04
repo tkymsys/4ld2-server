@@ -1,0 +1,17 @@
+
+ARG IMAGE_VERSION
+
+FROM l4d2server_base:${IMAGE_VERSION}
+
+ARG SERVER_UNAME
+ARG SERVER_UID
+ARG SERVER_GNAME
+ARG SERVER_GID
+ARG SERVER_PASS
+
+USER root
+COPY boot.sh /entrypoint/boot.sh
+RUN chown ${SERVER_UNAME}:${SERVER_GNAME} /entrypoint/boot.sh
+
+USER ${SERVER_UNAME}
+ENTRYPOINT ["/entrypoint/boot.sh"]

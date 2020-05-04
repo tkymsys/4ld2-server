@@ -1,0 +1,31 @@
+
+FROM centos:6
+
+ARG IMAGE_VERSION
+ARG SERVER_UNAME
+ARG SERVER_UID
+ARG SERVER_GNAME
+ARG SERVER_GID
+ARG SERVER_PASS
+
+##################################
+# コマンドのセットアップ
+##################################
+RUN yum update -y -q
+RUN yum install -y -q glibc.i686 libstdc++.i686 wget unzip sudo
+
+##################################
+# ユーザー・グループの作成
+##################################
+RUN groupadd -g ${SERVER_GID} ${SERVER_GNAME} && \
+    useradd  -u ${SERVER_UID} -g ${SERVER_GID} ${SERVER_UNAME} && \
+    echo "${SERVER_UNAME}:${SERVER_PASS}" | chpasswd
+
+##################################
+# ディレクトリのセットアップ
+##################################
+RUN mkdir /entrypoint && \
+    chown ${SERVER_UNAME}:${SERVER_GNAME} /entrypoint
+
+RUN ls -l /home
+RUN ls -l /home/${SERVER_UNAME}

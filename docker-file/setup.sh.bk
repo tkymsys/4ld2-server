@@ -1,0 +1,61 @@
+#!/bin/bash
+
+SERVER_DIR=/home/${SERVER_UNAME}/l4d2
+STEAMCMD_DIR=/home/${SERVER_UNAME}/steamcmd
+
+mkdir ${SERVER_DIR}
+mkdir ${STEAMCMD_DIR}
+
+# SteamCMDのインストール
+cd ${STEAMCMD_DIR}
+wget https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz
+tar xf steamcmd_linux.tar.gz
+
+# サーバーセットアップ
+./steamcmd.sh +login anonymous +force_install_dir ${SERVER_DIR} +app_update 222860 +quit
+cp -p /tmp/server.cfg ${SERVER_DIR}/left4dead2/cfg
+cd > /dev/null
+mkdir ./.steam/sdk32
+cp ./steamcmd/linux32/steamclient.so ./.steam/sdk32
+
+# SourceModのインストール
+cd > /dev/null
+mkdir sourcemod
+cd sourcemod > /dev/null
+wget https://sm.alliedmods.net/smdrop/1.10/sourcemod-1.10.0-git6488-linux.tar.gz
+tar xf sourcemod-1.10.0-git6488-linux.tar.gz
+cp -rf addons ${SERVER_DIR}/left4dead2
+cp -rf cfg ${SERVER_DIR}/left4dead2
+
+# Metamodのインストール
+cd > /dev/null
+mkdir metamod
+cd metamod > /dev/null
+wget https://mms.alliedmods.net/mmsdrop/1.10/mmsource-1.10.7-git971-linux.tar.gz
+tar xf mmsource-1.10.7-git971-linux.tar.gz
+cp -rf addons ${SERVER_DIR}/left4dead2
+
+# L4DToolZのインストール
+cd > /dev/null
+mkdir l4dtoolz
+cd l4dtoolz > /dev/null
+wget "https://forums.alliedmods.net/attachment.php?attachmentid=122230&d=1373147952" -O "l4dtoolz(L4D2)-1.0.0.9h.zip"
+unzip "l4dtoolz(L4D2)-1.0.0.9h.zip"
+cp -rf l4dtoolz ${SERVER_DIR}/left4dead2/addons
+cp -rf metamod ${SERVER_DIR}/left4dead2/addons
+cp -p /tmp/l4dtoolz.vdf ${SERVER_DIR}/left4dead2/addons/metamod
+
+# LEFT12DEADのインストール
+cd > /dev/null
+mkdir left12dead
+cd left12dead > /dev/null
+wget "http://www.sourcemod.net/vbcompiler.php?file_id=65668" -O "l4d_players.smx"
+cp l4d_players.smx ${SERVER_DIR}/left4dead2/addons/sourcemod/plugins
+
+# GameModeKeepのインストール
+cd > /dev/null
+mkdir gamemodekeep
+cd gamemodekeep > /dev/null
+wget "http://www.sourcemod.net/vbcompiler.php?file_id=64988" -O "l4d_gamemodekeep.smx"
+cp "l4d_gamemodekeep.smx" ${SERVER_DIR}/left4dead2/addons/sourcemod/plugins
+

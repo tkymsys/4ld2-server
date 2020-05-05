@@ -12,7 +12,7 @@ ARG SERVER_PASS
 # コマンドのセットアップ
 ##################################
 RUN yum update -y -q
-RUN yum install -y -q glibc.i686 libstdc++.i686 wget unzip sudo
+RUN yum install -y -q glibc.i686 libstdc++.i686 wget curl unzip sudo
 
 ##################################
 # ユーザー・グループの作成

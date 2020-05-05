@@ -1,11 +1,7 @@
 #!/bin/bash
 
-SERVER_DIR=/home/${SERVER_UNAME}/l4d2
+STEAM_DIR="/home/${SERVER_UNAME}/Steam"
+SERVER_DIR="${STEAM_DIR}/steamapps/common/Left 4 Dead 2 Dedicated Server"
 
-cd ${SERVER_DIR}
-# sudo -u ${SERVER_USER} ./srcds_run -console -game left4dead2 -port 27015
-# sudo -u ${SERVER_USER} ./srcds_run -console -game left4dead2 -port 27015 +maxplayers 4 +exec server.cfg +map c1m1_hotel coop
-while true
-do
- sleep 5
-done
+cd "${SERVER_DIR}"
+./srcds_run -console -game left4dead2 -port 27015 +exec server.cfg

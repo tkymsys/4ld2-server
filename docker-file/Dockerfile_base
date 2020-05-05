@@ -27,5 +27,3 @@ RUN groupadd -g ${SERVER_GID} ${SERVER_GNAME} && \
 RUN mkdir /entrypoint && \
     chown ${SERVER_UNAME}:${SERVER_GNAME} /entrypoint
 
-RUN ls -l /home
-RUN ls -l /home/${SERVER_UNAME}

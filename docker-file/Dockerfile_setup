@@ -13,7 +13,9 @@ USER root
 COPY server.cfg /tmp
 RUN chown ${SERVER_UNAME}:${SERVER_GNAME} /tmp/server.cfg
 COPY setup.sh /entrypoint/setup.sh
-RUN chown ${SERVER_UNAME}:${SERVER_GNAME} /entrypoint/setup.sh
+RUN chown ${SERVER_UNAME}:${SERVER_GNAME} /entrypoint/setup.sh && \
+    chmod +x /entrypoint/setup.sh
 
 USER ${SERVER_UNAME}
-ENTRYPOINT ["/entrypoint/setup.sh"]
+ENTRYPOINT /entrypoint/setup.sh
+

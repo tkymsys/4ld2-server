@@ -11,7 +11,8 @@ ARG SERVER_PASS
 
 USER root
 COPY boot.sh /entrypoint/boot.sh
-RUN chown ${SERVER_UNAME}:${SERVER_GNAME} /entrypoint/boot.sh
+RUN chown ${SERVER_UNAME}:${SERVER_GNAME} /entrypoint/boot.sh && \
+    chmod +x /entrypoint/boot.sh
 
 USER ${SERVER_UNAME}
-ENTRYPOINT ["/entrypoint/boot.sh"]
+ENTRYPOINT /entrypoint/boot.sh

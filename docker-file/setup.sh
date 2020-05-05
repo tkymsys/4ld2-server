@@ -43,9 +43,12 @@ mkdir l4dtoolz
 cd l4dtoolz > /dev/null
 wget "https://forums.alliedmods.net/attachment.php?attachmentid=122230&d=1373147952" -O "l4dtoolz(L4D2)-1.0.0.9h.zip"
 unzip "l4dtoolz(L4D2)-1.0.0.9h.zip"
+wget "https://forums.alliedmods.net/attachment.php?attachmentid=77028&d=1289329169" -O "l4dtoolz-fix.zip"
+unzip "l4dtoolz-fix.zip"
 chmod -R +rx *
 cp -rf l4dtoolz "${SERVER_DIR}/left4dead2/addons"
 cp -rf metamod "${SERVER_DIR}/left4dead2/addons"
+cp -p l4dtoolz_mm.dll "${SERVER_DIR}/left4dead2/addons/l4dtoolz"
 
 # LEFT12DEADのインストール
 cd ${WORK_DIR} > /dev/null
@@ -54,12 +57,4 @@ cd left12dead > /dev/null
 wget "http://www.sourcemod.net/vbcompiler.php?file_id=65668" -O "l4d_players.smx"
 chmod -R +rx *
 cp l4d_players.smx "${SERVER_DIR}/left4dead2/addons/sourcemod/plugins"
-
-# GameModeKeepのインストール
-cd ${WORK_DIR} > /dev/null
-mkdir gamemodekeep
-cd gamemodekeep > /dev/null
-wget "http://www.sourcemod.net/vbcompiler.php?file_id=64988" -O "l4d_gamemodekeep.smx"
-chmod -R +rx *
-cp "l4d_gamemodekeep.smx" "${SERVER_DIR}/left4dead2/addons/sourcemod/plugins"
 

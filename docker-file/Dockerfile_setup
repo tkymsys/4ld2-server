@@ -5,18 +5,18 @@ FROM l4d2server_base:${IMAGE_VERSION}
 
 ARG SERVER_UNAME
 ARG SERVER_UID
-ARG SERVER_GNAME
-ARG SERVER_GID
 ARG SERVER_PASS
 
 USER root
 COPY server.cfg /tmp
-RUN chown ${SERVER_UNAME}:${SERVER_GNAME} /tmp/server.cfg
+RUN chown ${SERVER_UNAME}:${SERVER_GNAME} /tmp/server.cfg && \
+    chmod +xr /tmp/server.cfg
 COPY l4dtoolz.vdf /tmp
-RUN chown ${SERVER_UNAME}:${SERVER_GNAME} /tmp/l4dtoolz.vdf
+RUN chown ${SERVER_UNAME}:${SERVER_GNAME} /tmp/l4dtoolz.vdf && \
+    chmod +xr /tmp/l4dtoolz.vdf
 COPY setup.sh /entrypoint/setup.sh
 RUN chown ${SERVER_UNAME}:${SERVER_GNAME} /entrypoint/setup.sh && \
-    chmod +x /entrypoint/setup.sh
+    chmod +xr /entrypoint/setup.sh
 
 USER ${SERVER_UNAME}
 ENTRYPOINT /entrypoint/setup.sh

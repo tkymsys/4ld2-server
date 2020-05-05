@@ -1,17 +1,40 @@
 
-FROM cm2network/steamcmd:latest
+# 以下は https://github.com/CM2Walki/steamcmd/blob/b8f19872647a7adfbf7afb4bce7e0bfa1153c833/buster/Dockerfile の模倣
+
+ARG IMAGE_VERSION
+
+FROM debian:buster-slim
 
 ARG IMAGE_VERSION
 ARG SERVER_UNAME
 ARG SERVER_UID
-ARG SERVER_GNAME
-ARG SERVER_GID
-ARG SERVER_PASS
+
+##################################
+# 必要なファイルの取得
+##################################
+RUN set -x \
+	&& apt-get update \
+	&& apt-get install -y --no-install-recommends --no-install-suggests \
+		lib32stdc++6=8.3.0-6 \
+		lib32gcc1=1:8.3.0-6 \
+		wget=1.20.1-1.1 \
+		ca-certificates=20190110 \
+	&& apt-get remove --purge -y \
+		wget \
+	&& apt-get clean autoclean \
+	&& apt-get autoremove -y \
+	&& rm -rf /var/lib/apt/lists/*
+
+###################################
+# ユーザーの作成
+##################################
+RUN useradd -u ${SERVER_UID} -m ${SERVER_UNAME}
 
 ##################################
 # ディレクトリのセットアップ
 ##################################
+USER root
 RUN mkdir /entrypoint && \
-    chown ${SERVER_UNAME}:${SERVER_GNAME} /entrypoint
+    chown ${SERVER_UNAME} /entrypoint
 
-RUN id
+USER ${SERVER_UNAME}

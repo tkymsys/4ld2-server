@@ -30,7 +30,9 @@ winpty docker exec -it l4d2server_boot bash
 - https://github.com/CM2Walki/steamcmd
 - https://www.sourcemod.net/
 - https://www.sourcemm.net/
-- xxx
+- https://steamcommunity.com/groups/omoro/discussions/0/1621726179581137315/
+- xx
+
 - https://kimamalab.azurewebsites.net/Left4Dead2/BuildServer
 - http://kinoex.hatenablog.com/entry/2018/06/24/180620
 - https://steamcommunity.com/groups/omoro/discussions/0/1621726179581137315/

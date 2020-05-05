@@ -15,7 +15,8 @@ wget -qO- 'https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.g
 cd ${STEAMCMD_DIR}
 ./steamcmd.sh +login anonymous +app_update 222860 +quit
 cp -p /tmp/server.cfg "${SERVER_DIR}/left4dead2/cfg"
-ln -s steamcmd/linux32/steamclient.so ~/.steam/sdk32/steamclient.so
+mkdir ~/.steam/sdk32
+ln -s linux32/steamclient.so ~/.steam/sdk32/steamclient.so
 
 # Metamodのインストール
 cd ${WORK_DIR} > /dev/null

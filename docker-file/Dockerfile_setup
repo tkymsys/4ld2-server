@@ -11,9 +11,6 @@ USER root
 COPY server.cfg /tmp
 RUN chown ${SERVER_UNAME}:${SERVER_GNAME} /tmp/server.cfg && \
     chmod +xr /tmp/server.cfg
-COPY l4dtoolz.vdf /tmp
-RUN chown ${SERVER_UNAME}:${SERVER_GNAME} /tmp/l4dtoolz.vdf && \
-    chmod +xr /tmp/l4dtoolz.vdf
 COPY setup.sh /entrypoint/setup.sh
 RUN chown ${SERVER_UNAME}:${SERVER_GNAME} /entrypoint/setup.sh && \
     chmod +xr /entrypoint/setup.sh

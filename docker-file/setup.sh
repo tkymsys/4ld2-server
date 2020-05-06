@@ -1,10 +1,11 @@
 #!/bin/bash
 
 STEAMCMD_DIR="/home/${SERVER_UNAME}/steamcmd"
-SERVER_DIR="/home/${SERVER_UNAME}/Steam/steamapps/common/Left 4 Dead 2 Dedicated Server"
+SERVER_DIR="/home/${SERVER_UNAME}/server"
 WORK_DIR="/home/${SERVER_UNAME}/work"
 
 mkdir ${STEAMCMD_DIR}
+mkdir ${SERVER_DIR}
 mkdir "${WORK_DIR}"
 
 # SteamCMDのインストール
@@ -13,7 +14,7 @@ wget -qO- 'https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.g
 
 # サーバーセットアップ
 cd ${STEAMCMD_DIR}
-./steamcmd.sh +login anonymous +app_update 222860 +quit
+./steamcmd.sh +login anonymous +force_install_dir "${SERVER_DIR}" +app_update 222860 +quit
 cp -p /tmp/server.cfg "${SERVER_DIR}/left4dead2/cfg"
 mkdir ~/.steam/sdk32
 ln -s linux32/steamclient.so ~/.steam/sdk32/steamclient.so
@@ -43,17 +44,18 @@ mkdir l4dtoolz
 cd l4dtoolz > /dev/null
 wget "https://forums.alliedmods.net/attachment.php?attachmentid=122230&d=1373147952" -O "l4dtoolz(L4D2)-1.0.0.9h.zip"
 unzip "l4dtoolz(L4D2)-1.0.0.9h.zip"
-wget "https://forums.alliedmods.net/attachment.php?attachmentid=77028&d=1289329169" -O "l4dtoolz-fix.zip"
-unzip "l4dtoolz-fix.zip"
+# wget "https://forums.alliedmods.net/attachment.php?attachmentid=77028&d=1289329169" -O "l4dtoolz-fix.zip"
+# unzip "l4dtoolz-fix.zip"
+# rm -f l4dtoolz/l4dtoolz_mm.so
+# mv l4dtoolz/l4dtoolz_mm_i486.so l4dtoolz/l4dtoolz_mm.so
 chmod -R +rx *
 cp -rf l4dtoolz "${SERVER_DIR}/left4dead2/addons"
 cp -rf metamod "${SERVER_DIR}/left4dead2/addons"
-cp -p l4dtoolz_mm.dll "${SERVER_DIR}/left4dead2/addons/l4dtoolz"
 
-# LEFT12DEADのインストール
+# l4d_playersのインストール
 cd ${WORK_DIR} > /dev/null
-mkdir left12dead
-cd left12dead > /dev/null
+mkdir l4dplayers
+cd l4dplayers > /dev/null
 wget "http://www.sourcemod.net/vbcompiler.php?file_id=65668" -O "l4d_players.smx"
 chmod -R +rx *
 cp l4d_players.smx "${SERVER_DIR}/left4dead2/addons/sourcemod/plugins"

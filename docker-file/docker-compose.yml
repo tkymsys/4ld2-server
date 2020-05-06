@@ -21,14 +21,5 @@ services:
       - "27015:27015/udp"
     volumes:
       - /home/${SERVER_UNAME}/l4f2server_volume:/home/${SERVER_UNAME}
-   
-  l4d2server_testboot: 
-    container_name: l4d2server_testboot
-    env_file: .env
-    image: l4d2server_boot:${IMAGE_VERSION}
-    ports:
-      - "27015:27015/tcp"
-      - "27015:27015/udp"
-    volumes:
-      - /home/${SERVER_UNAME}/l4f2server_volume:/home/${SERVER_UNAME}
     entrypoint: ["/bin/sh", "-c", "while :; do sleep 10; done"]
+   

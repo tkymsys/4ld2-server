@@ -21,8 +21,12 @@ sh clean.sh
 ```
 docker-compose down --rmi all --volumes
 docker system prune -f
-winpty docker exec -it l4d2server_setup bash
-winpty docker exec -it l4d2server_boot bash
+docker exec -it l4d2server_setup bash
+docker exec -it l4d2server_boot bash
+
+meta list
+sm version
+sm plugins list
 ```
 
 # 参考

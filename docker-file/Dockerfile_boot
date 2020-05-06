@@ -13,4 +13,4 @@ RUN chown ${SERVER_UNAME} /entrypoint/boot.sh && \
     chmod +xr /entrypoint/boot.sh
 
 USER ${SERVER_UNAME}
-ENTRYPOINT /entrypoint/boot.sh
+# ENTRYPOINT /entrypoint/boot.sh

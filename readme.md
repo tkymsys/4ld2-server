@@ -5,7 +5,7 @@ Docker環境上にてLeft4Dead2（l4d2）（多人数キャンペーン向け）
 - SourceMod v1.10.0
 - L4DToolZ v1.0.0.9h
 - L4D2 Bug Fixes v1.0.2
-- L4D2 Defib Fix v???
+- L4D2 Defib Fix v1.0.1
 - ABM v0.1.95
 
 > 詳しくは docker-file/install-script.list や docker-file\install-script内のファイルを参照してください。

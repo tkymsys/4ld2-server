@@ -11,6 +11,12 @@ USER root
 COPY server.cfg /tmp
 RUN chown ${SERVER_UNAME}:${SERVER_GNAME} /tmp/server.cfg && \
     chmod +xr /tmp/server.cfg
+COPY install-script.list /tmp
+RUN chown ${SERVER_UNAME}:${SERVER_GNAME} /tmp/install-script.list && \
+    chmod +xr /tmp/install-script.list
+COPY install-script/ /tmp/install-script/
+RUN chown ${SERVER_UNAME}:${SERVER_GNAME} /tmp/install-script && \
+    chmod -R +xr /tmp/install-script
 COPY setup.sh /entrypoint/setup.sh
 RUN chown ${SERVER_UNAME}:${SERVER_GNAME} /entrypoint/setup.sh && \
     chmod +xr /entrypoint/setup.sh

@@ -5,4 +5,5 @@ cd ${SCRIPT_DIR} > /dev/null
 
 docker start l4d2server_boot
 docker exec -it l4d2server_boot "/entrypoint/boot.sh"
+docker stop l4d2server_boot
 

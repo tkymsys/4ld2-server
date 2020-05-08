@@ -1,62 +1,19 @@
 #!/bin/bash
 
-STEAMCMD_DIR="/home/${SERVER_UNAME}/steamcmd"
-SERVER_DIR="/home/${SERVER_UNAME}/server"
-WORK_DIR="/home/${SERVER_UNAME}/work"
+export STEAMCMD_DIR="/home/${SERVER_UNAME}/steamcmd"
+export SERVER_DIR="/home/${SERVER_UNAME}/server"
+export INSTALL_SCRIPT_DIR="/home/${SERVER_UNAME}/install-script"
+export WORK_DIR="/home/${SERVER_UNAME}/work"
 
-mkdir ${STEAMCMD_DIR}
-mkdir ${SERVER_DIR}
+mkdir "${STEAMCMD_DIR}"
+mkdir "${SERVER_DIR}"
+mkdir "${INSTALL_SCRIPT_DIR}"
 mkdir "${WORK_DIR}"
 
-# SteamCMDのインストール
-cd "${STEAMCMD_DIR}"
-wget -qO- 'https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz' | tar zxf -
+cp /tmp/install-script/* "${INSTALL_SCRIPT_DIR}"
+cp /tmp/install-script.list "/home/${SERVER_UNAME}"
 
-# サーバーセットアップ
-cd ${STEAMCMD_DIR}
-./steamcmd.sh +login anonymous +force_install_dir "${SERVER_DIR}" +app_update 222860 +quit
-cp -p /tmp/server.cfg "${SERVER_DIR}/left4dead2/cfg"
-mkdir ~/.steam/sdk32
-ln -s linux32/steamclient.so ~/.steam/sdk32/steamclient.so
-
-# Metamodのインストール
-cd ${WORK_DIR} > /dev/null
-mkdir metamod
-cd metamod > /dev/null
-wget https://mms.alliedmods.net/mmsdrop/1.10/mmsource-1.10.7-git971-linux.tar.gz
-tar xf mmsource-1.10.7-git971-linux.tar.gz
-chmod -R +rx *
-cp -rf addons "${SERVER_DIR}/left4dead2"
-
-# SourceModのインストール
-cd ${WORK_DIR} > /dev/null
-mkdir sourcemod
-cd sourcemod > /dev/null
-wget https://sm.alliedmods.net/smdrop/1.10/sourcemod-1.10.0-git6488-linux.tar.gz
-tar xf sourcemod-1.10.0-git6488-linux.tar.gz
-chmod -R +rx *
-cp -rf addons "${SERVER_DIR}/left4dead2"
-cp -rf cfg "${SERVER_DIR}/left4dead2"
-
-# L4DToolZのインストール
-cd ${WORK_DIR} > /dev/null
-mkdir l4dtoolz
-cd l4dtoolz > /dev/null
-wget "https://forums.alliedmods.net/attachment.php?attachmentid=122230&d=1373147952" -O "l4dtoolz(L4D2)-1.0.0.9h.zip"
-unzip "l4dtoolz(L4D2)-1.0.0.9h.zip"
-# wget "https://forums.alliedmods.net/attachment.php?attachmentid=77028&d=1289329169" -O "l4dtoolz-fix.zip"
-# unzip "l4dtoolz-fix.zip"
-# rm -f l4dtoolz/l4dtoolz_mm.so
-# mv l4dtoolz/l4dtoolz_mm_i486.so l4dtoolz/l4dtoolz_mm.so
-chmod -R +rx *
-cp -rf l4dtoolz "${SERVER_DIR}/left4dead2/addons"
-cp -rf metamod "${SERVER_DIR}/left4dead2/addons"
-
-# l4d_playersのインストール
-cd ${WORK_DIR} > /dev/null
-mkdir l4dplayers
-cd l4dplayers > /dev/null
-wget "http://www.sourcemod.net/vbcompiler.php?file_id=65668" -O "l4d_players.smx"
-chmod -R +rx *
-cp l4d_players.smx "${SERVER_DIR}/left4dead2/addons/sourcemod/plugins"
-
+for script in `cat /home/${SERVER_UNAME}/install-script.list`
+do
+  ${INSTALL_SCRIPT_DIR}/${script}
+done

@@ -12,6 +12,7 @@ ARG SERVER_UID
 ##################################
 # 必要なファイルの取得
 ##################################
+ENV DEBIAN_FRONTEND noninteractive
 RUN set -x \
 	&& apt-get update \
 	&& apt-get install -y --no-install-recommends --no-install-suggests \
@@ -20,20 +21,32 @@ RUN set -x \
 		wget=1.20.1-1.1 \
 		ca-certificates=20190110 \
                 unzip \
+                locales \
 	&& apt-get clean autoclean \
 	&& apt-get autoremove -y \
 	&& rm -rf /var/lib/apt/lists/*
 
-###################################
+##################################
+# 環境設定
+##################################
+RUN echo "ja_JP.UTF-8 UTF-8" > /etc/locale.gen && \
+    echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen && \
+    locale-gen && \
+    dpkg-reconfigure locales && \
+    /usr/sbin/update-locale LANG=ja_JP.UTF-8
+ENV LC_ALL ja_JP.UTF-8
+
+##################################
 # ユーザーの作成
 ##################################
 RUN useradd -u ${SERVER_UID} -m ${SERVER_UNAME}
 
 ##################################
-# ディレクトリのセットアップ
-##################################
+## ディレクトリのセットアップ
+###################################
 USER root
 RUN mkdir /entrypoint && \
     chown ${SERVER_UNAME} /entrypoint
 
 USER ${SERVER_UNAME}
+

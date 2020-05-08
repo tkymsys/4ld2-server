@@ -14,17 +14,17 @@ ARG SERVER_UID
 ##################################
 ENV DEBIAN_FRONTEND noninteractive
 RUN set -x \
-	&& apt-get update \
-	&& apt-get install -y --no-install-recommends --no-install-suggests \
-		lib32stdc++6=8.3.0-6 \
-		lib32gcc1=1:8.3.0-6 \
-		wget=1.20.1-1.1 \
-		ca-certificates=20190110 \
-                unzip \
-                locales \
-	&& apt-get clean autoclean \
-	&& apt-get autoremove -y \
-	&& rm -rf /var/lib/apt/lists/*
+  && apt-get update \
+  && apt-get install -y --no-install-recommends --no-install-suggests \
+       lib32stdc++6=8.3.0-6 \
+       lib32gcc1=1:8.3.0-6 \
+       wget=1.20.1-1.1 \
+       ca-certificates=20190110 \
+       unzip \
+       locales \
+  && apt-get clean autoclean \
+  && apt-get autoremove -y \
+  && rm -rf /var/lib/apt/lists/*
 
 ##################################
 # 環境設定
@@ -49,4 +49,3 @@ RUN mkdir /entrypoint && \
     chown ${SERVER_UNAME} /entrypoint
 
 USER ${SERVER_UNAME}
-

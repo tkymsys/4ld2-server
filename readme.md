@@ -1,42 +1,32 @@
-# 概要
-todo
+Docker環境上にてLeft4Dead2（l4d2）（多人数キャンペーン向け）のサーバーを構築する。
 
-# 利用方法
-```
-// サーバーの導入
-sh install.sh
+# 導入プラグインなど
+- Metamod v1.10.7
+- SourceMod v1.10.0
+- L4DToolZ v1.0.0.9h
+- L4D2 Bug Fixes v1.0.2
+- L4D2 Defib Fix v???
+- ABM v0.1.95
 
-// サーバーの起動
-sh start.sh
+> 詳しくは docker-file/install-script.list や docker-file\install-script内のファイルを参照してください。
 
-// サーバーの停止
-sh start.sh
+# 前提
+- docker,docker-composeがインストールされていること。
 
-// 環境の破棄
-// ただしvolume配下のファイルは削除されないため、それらも不要であれば手動にて削除してください。
-sh clean.sh
-```
+# 利用手順
+- サーバーファイルインストール先ディレクトリを作成する。
+- サーバーファイルインストール先ディレクトリのオーナーであるユーザーのユーザー名、ユーザーIDを控える。
+- 本gitリポジトリを任意のディレクトリに`git clone`する。
+- clone先に格納されている設定ファイル`docker-file/.env`を編集する。
+  ```
+  SERVER_UNAME=${サーバーファイルインストール先ディレクトリのオーナーであるユーザーのユーザー名}
+  SERVER_UID=${サーバーファイルインストール先ディレクトリのオーナーであるユーザーのユーザーID}
+  MOUNT_PATH=${サーバーファイルインストール先ディレクトリ}
 
-# コマンドメモ
-```
-docker-compose down --rmi all --volumes
-docker system prune -f
-docker exec -it l4d2server_setup bash
-docker exec -it l4d2server_boot bash
-
-meta list
-sm version
-sm plugins list
-```
-
-# 参考
-- https://developer.valvesoftware.com/wiki/SteamCMD
-- https://github.com/CM2Walki/steamcmd
-- https://www.sourcemod.net/
-- https://www.sourcemm.net/
-- https://steamcommunity.com/groups/omoro/discussions/0/1621726179581137315/
-- xx
-
-- https://kimamalab.azurewebsites.net/Left4Dead2/BuildServer
-- http://kinoex.hatenablog.com/entry/2018/06/24/180620
-- https://steamcommunity.com/groups/omoro/discussions/0/1621726179581137315/
+  例
+  SERVER_UNAME=steam
+  SERVER_UID=1001
+  MOUNT_PATH=/home/steam/l4f2server_volume
+  ```
+- clone先にて`sh install.sh`を実行し、サーバーをインストールする。
+- clone先にて`sh attach.sh`を実行するとサーバーが起動する。サーバー起動後、コンソールにて`ctrl + c`でサーバーを停止できる。

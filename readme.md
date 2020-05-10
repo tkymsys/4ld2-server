@@ -7,6 +7,10 @@ Docker環境上にてLeft4Dead2（l4d2）（多人数キャンペーン向け）
 - L4D2 Bug Fixes v1.0.2
 - L4D2 Defib Fix v1.0.1
 - ABM v0.1.95
+- L4D2 Gore v1.1
+- Infected Bots Control v2.2.1
+- Steam Workshop Content Downloader
+- いくつかのカスタムマップ
 
 > 詳しくは docker-file/install-script.list や docker-file\install-script内のファイルを参照してください。
 

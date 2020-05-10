@@ -6,3 +6,7 @@ L4DToolZ.sh
 L4D2BugFixes.sh
 L4D2DefibFix.sh
 ABM.sh
+L4D2Gore.sh
+InfectedBotsControl.sh
+SteamWorkshopContentDownloader.sh
+SteamAddonInstall.sh
